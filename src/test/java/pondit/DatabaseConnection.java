@@ -1,6 +1,6 @@
 package pondit;
 
-public interface DatabaseConnectionInterface {
+public interface DatabaseConnection {
     public void connect();
     public void query();
     public void disconnect();

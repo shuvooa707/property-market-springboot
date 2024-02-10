@@ -8,12 +8,13 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
-public class PropertyService {
+public class SeederService {
 
     @Autowired
     PropertyRepository propertyRepository;
 
-    public List<Property> getAllProperties() {
-        return propertyRepository.findAll();
+    public void seed() {
+        Property property1 = new Property();
+//        propertyRepository.save(property1);
     }
 }

@@ -1,4 +1,4 @@
-package pondit.contest;
+package pondit.contest2;
 
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;

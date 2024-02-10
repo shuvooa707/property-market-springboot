@@ -1,70 +1,48 @@
 package com.propertymarket.model;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.stereotype.Component;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "properties")
-public class Property {
+@Entity(name = "addresses")
+public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
 
-    @Column(name = "title")
-    String title;
+    @Column(name = "street")
+    String street;
 
-    @Column(name = "description")
-    String description;
+    @Column(name = "city")
+    String city;
 
-    @Column(name = "price")
-    Double price;
+    @Column(name = "state")
+    String state;
 
-    @Column(name = "bedrooms")
-    Integer bedrooms;
+    @Column(name = "country")
+    String country;
 
-    @Column(name = "bathrooms")
-    Integer bathrooms;
+    @Column(name = "zip_code")
+    Long zip_code;
 
-    @Column(name = "balconies")
-    Integer balconies;
-
-    @Column(name = "garages")
-    Integer garages;
-
-    @Column(name = "location")
-    String location;
-
-    @Column(name = "is_available")
-    Boolean is_available;
-
-    @Column(name = "company_id")
-    Long company_id;
-
-    @Column(name = "address_id")
-    Long address_id;
-
-    @Column(name = "category_id")
-    Long category_id;
-
-
-
-    @Column(name = "sqft")
-    Long sqft;
-
-    @Column(name = "thumbnail")
-    String thumbnail;
+    /********** Accessors **************/
+    public String getFullAddress() {
+        return this.getStreet() + ", " + this.getCity() +  ", " + this.getZip_code() + ", " + this.getCountry();
+    }
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at", updatable = false)
     private Date CreatedAt;
+
 }

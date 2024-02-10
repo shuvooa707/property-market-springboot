@@ -1,70 +1,45 @@
-package com.propertymarket.model;
+package com.propertymarket.dto;
 
-import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "properties")
-public class Property {
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    Long id;
+public class PropertyDTO {
 
-    @Column(name = "title")
     String title;
 
-    @Column(name = "description")
     String description;
 
-    @Column(name = "price")
     Double price;
 
-    @Column(name = "bedrooms")
     Integer bedrooms;
 
-    @Column(name = "bathrooms")
     Integer bathrooms;
 
-    @Column(name = "balconies")
     Integer balconies;
 
-    @Column(name = "garages")
     Integer garages;
 
-    @Column(name = "location")
     String location;
 
-    @Column(name = "is_available")
     Boolean is_available;
 
-    @Column(name = "company_id")
-    Long company_id;
+    String company_id;
 
-    @Column(name = "address_id")
-    Long address_id;
+    String category_id;
 
-    @Column(name = "category_id")
-    Long category_id;
-
-
-
-    @Column(name = "sqft")
     Long sqft;
 
-    @Column(name = "thumbnail")
-    String thumbnail;
+    MultipartFile thumbnailFile;
 
-    @CreationTimestamp
-    @Temporal(TemporalType.TIMESTAMP)
-    @Column(name = "created_at", updatable = false)
-    private Date CreatedAt;
+    List<MultipartFile> imageFiles;
 }

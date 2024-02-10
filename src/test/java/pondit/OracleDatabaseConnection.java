@@ -1,12 +1,12 @@
 package pondit;
 
-public class MysqlDatabaseConnection implements  DatabaseConnectionInterface{
+public class OracleDatabaseConnection implements DatabaseConnection {
     /**
      *
      */
     @Override
     public void connect() {
-        System.out.println("Connection MySQL Database...");
+        System.out.println("Connection Oracle Database...");
     }
 
     /**
@@ -14,7 +14,7 @@ public class MysqlDatabaseConnection implements  DatabaseConnectionInterface{
      */
     @Override
     public void query() {
-        System.out.println("Querying To MySQL Database...");
+        System.out.println("Querying To Oracle Database...");
     }
 
     /**
@@ -22,6 +22,6 @@ public class MysqlDatabaseConnection implements  DatabaseConnectionInterface{
      */
     @Override
     public void disconnect() {
-        System.out.println("Disconnection From MySQL Database...");
+        System.out.println("Disconnection From Oracle Database...");
     }
 }

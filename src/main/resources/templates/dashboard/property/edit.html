@@ -1,32 +1,24 @@
 <!doctype html>
-<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<html
+        lang="en"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        th:replace="/dashboard/layout/DashboardLayout::layout(~{::section})"
+>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet" />
-    <title>Document</title>
+
 </head>
 <body>
 
-<button data-drawer-target="default-sidebar" data-drawer-toggle="default-sidebar" aria-controls="default-sidebar" type="button" class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
-    <span class="sr-only">Open sidebar</span>
-    <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-        <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
-    </svg>
-</button>
-
-
-<aside th:replace="layout/sidebar::sidebar"></aside>
 
 <!--  Main Content  -->
-<div class="grid grid-cols-1 w-2/3 rounded rounded-md m-5 dark:bg-gray-500 mx-auto items-center" style="margin-left: 280px">
-    <h2 class="text-gray-50 text-center p-5 bg-gray-950 mb-2">Add New Property</h2>
-    <form method="post" action="/admin/property/create" enctype="multipart/form-data" class="w-full grid grid-cols-1 px-8 pb-8 mx-auto">
+<section class="grid grid-cols-1 w-2/3 rounded rounded-md m-5 dark:bg-gray-500 mx-auto items-center" style="margin-left: 280px">
+    <h2 class="text-gray-50 text-center p-5 bg-gray-950 mb-2 flex justify-between">
+        <span>Update Property Details</span>
+        <a href="/admin/property/" class="bg-green-700 text-white px-4 py-2 rounded rounded-m">Cancel</a>
+    </h2>
+    <form method="post" action="/admin/property/update" enctype="multipart/form-data" class="w-full grid grid-cols-1 px-8 pb-8 mx-auto">
+        <input type="hidden" name="id" th:value="${property.id}">
         <!-- Image Uploader -->
         <div class="grid grid-cols-2">
             <!-- Property Thumbnail -->
@@ -47,49 +39,49 @@
             <!-- Property Name -->
             <div class="mb-5 mx-5">
                 <label for="title" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Property Name</label>
-                <input type="text" name="title" id="title" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="title" required>
+                <input th:value="${property.title}"  type="text" name="title" id="title" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" placeholder="title" required>
             </div>
             <!-- End Property Name -->
 
             <!-- Price -->
             <div class="mb-5 mx-5">
                 <label for="price" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Price</label>
-                <input type="number" name="price" id="price" step="1" min="0" max="9999999999" placeholder="Price" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required>
+                <input th:value="${property.price}" type="number" name="price" id="price" step="1" min="0" max="9999999999" placeholder="Price" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required>
             </div>
             <!-- End Price -->
 
             <!-- Square Feet -->
             <div class="mb-5 mx-5">
                 <label for="sqft" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Square Feet</label>
-                <input type="number" name="sqft" id="sqft" placeholder="sqft" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required>
+                <input th:value="${property.sqft}" type="number" name="sqft" id="sqft" placeholder="sqft" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required>
             </div>
             <!-- End Square Feet -->
 
             <!-- Bedrooms -->
             <div class="mb-5 mx-5">
                 <label for="bedrooms" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Bedrooms</label>
-                <input type="number" name="bedrooms" min="0" step="1" id="bedrooms" placeholder="bedrooms" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required>
+                <input th:value="${property.getBedrooms()}" type="number" name="bedrooms" min="0" step="1" id="bedrooms" placeholder="bedrooms" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required>
             </div>
             <!-- End Bedrooms -->
 
             <!-- bathrooms -->
             <div class="mb-5 mx-5">
                 <label for="bathrooms" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">bathrooms</label>
-                <input type="number" name="bathrooms" min="0" step="1" id="bathrooms" placeholder="bathrooms" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required>
+                <input th:value="${property.getBathrooms()}" type="number" name="bathrooms" min="0" step="1" id="bathrooms" placeholder="bathrooms" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required>
             </div>
             <!-- End bathrooms -->
 
             <!-- balconies -->
             <div class="mb-5 mx-5">
                 <label for="balconies" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">balconies</label>
-                <input type="number" name="balconies" min="0" step="1" id="balconies" placeholder="balconies" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required>
+                <input th:value="${property.getBalconies()}" type="number" name="balconies" min="0" step="1" id="balconies" placeholder="balconies" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required>
             </div>
             <!-- End balconies -->
 
             <!-- garages -->
             <div class="mb-5 mx-5">
                 <label for="garages" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Garages</label>
-                <input type="number" name="garages" min="0" step="1" id="garages" placeholder="garages" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required>
+                <input th:value="${property.getGarages()}" type="number" name="garages" min="0" step="1" id="garages" placeholder="garages" class="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 dark:shadow-sm-light" required>
             </div>
             <!-- End garages -->
 
@@ -98,27 +90,32 @@
             <div class="mb-5 mx-5">
                 <label for="company_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Company</label>
                 <select id="company_id" name="company_id" value="1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option th:each="company : ${companies}" th:value="${company.id}" th:text="${company.title}"></option>
+                    <option th:selected="${ company.id == property.getCategory_id() ? 'true' : 'false' }" th:each="company : ${companies}" th:value="${company.id}" th:text="${company.title}"></option>
                 </select>
             </div>
             <!-- End Company -->
 
-            <!-- Address -->
+            <!-- Category -->
             <div class="mb-5 mx-5">
-                <label for="address_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Address</label>
-                <select id="address_id" name="address_id" value="1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option th:each="address : ${addresses}" th:value="${address.id}" th:text="${address.street}"></option>
+                <label for="category_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
+                <select id="category_id" name="category_id" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
+                    <option
+                            th:each="category : ${categories}"
+                            th:value="${category.id}"
+                            th:text="${category.name}"
+                            th:selected="${ property.getCategory_id() == property.getCategory_id() ? 'true' : 'false' }">
+                    </option>
                 </select>
             </div>
-            <!-- End Address -->
+            <!-- End Category -->
 
 
             <!-- Is Available -->
             <div class="mb-5 mx-5">
                 <label for="is_available" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Is Available</label>
                 <select id="is_available" name="is_available" value="1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
-                    <option value="1">Yes</option>
-                    <option value="0">No</option>
+                    <option value="1" th:selected="${ property.getIs_available() ? 'true' : 'false' }">Yes</option>
+                    <option value="0" th:selected="${ property.getIs_available() ? 'false' : 'true' }">No</option>
                 </select>
             </div>
             <!-- End Available -->
@@ -126,28 +123,20 @@
             <!-- Description -->
             <div class="mb-5 mx-5">
                 <label for="description" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Description</label>
-                <textarea id="description" name="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Description..."></textarea>
+                <textarea th:value="${property.getDescription()}" th:text="${property.getDescription()}" id="description" name="description" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Description..."></textarea>
             </div>
             <!-- End Description -->
-
 
 
             <!-- location -->
             <div class="mb-5 mx-5">
                 <label for="location" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Location</label>
-                <textarea id="location" name="location" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="location..."></textarea>
+                <textarea th:value="${property.getLocation()}" th:text="${property.getLocation()}" id="location" name="location" rows="4" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="location..."></textarea>
             </div>
             <!-- End location -->
 
 
-            <!-- Category -->
-            <div class="mb-5 mx-5">
-                <label for="category_id" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Category</label>
-                <select id="category_id" name="category_id" value="1" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required>
-                    <option th:each="category : ${categories}" th:value="${category.id}" th:text="${category.name}"></option>
-                </select>
-            </div>
-            <!-- End Category -->
+
         </div>
 
         <div class="mb-5 mx-5 mt-5">
@@ -157,7 +146,7 @@
         </div>
 
     </form>
-</div>
+</section>
 <!-- End Main Content  -->
 
 </body>

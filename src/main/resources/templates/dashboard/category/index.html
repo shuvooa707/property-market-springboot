@@ -1,31 +1,26 @@
 <!doctype html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+        th:replace="/dashboard/layout/DashboardLayout::layout(~{::section})"
+>
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.js"></script>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <title>Document</title>
+    <title>All Category</title>
 </head>
 <body>
 
-<button data-drawer-target="default-sidebar" data-drawer-toggle="default-sidebar" aria-controls="default-sidebar" type="button" class="inline-flex items-center p-2 mt-2 ms-3 text-sm text-gray-500 rounded-lg sm:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600">
-    <span class="sr-only">Open sidebar</span>
-    <svg class="w-6 h-6" aria-hidden="true" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-        <path clip-rule="evenodd" fill-rule="evenodd" d="M2 4.75A.75.75 0 012.75 4h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 4.75zm0 10.5a.75.75 0 01.75-.75h7.5a.75.75 0 010 1.5h-7.5a.75.75 0 01-.75-.75zM2 10a.75.75 0 01.75-.75h14.5a.75.75 0 010 1.5H2.75A.75.75 0 012 10z"></path>
-    </svg>
-</button>
 
-
-<aside th:replace="layout/sidebar::sidebar"></aside>
 
 <!--  Main Content  -->
-<div class="grid grid-cols-1 md:grid-cols-1 xl:grid-cols-1 p-8 m-5" style="margin-left: 280px">
+<section class="grid grid-cols-1 md:grid-cols-1 xl:grid-cols-1 p-8 m-5 w-2/4" style="margin-left: 480px">
+    <div class="grid grid-cols-6 mb-3 text-center">
+        <a href="/admin/category/create" class="bg-orange-50 text-pink-800 px-2 py-2 rounded rounded-m cursor-pointer w-full my-5 flex items-center">
+            <i class="fa-solid fa-plus mx-3"></i>
+            <span class="px-1"> </span>
+            <span>Create</span>
+        </a>
+    </div>
     <div class="relative overflow-x-auto">
         <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
             <thead class="text-xs text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
@@ -34,16 +29,7 @@
                     #
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Title
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Price
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Category
-                </th>
-                <th scope="col" class="px-6 py-3">
-                    Location
+                    Name
                 </th>
                 <th scope="col" class="px-6 py-3">
                     Action
@@ -51,19 +37,13 @@
             </tr>
             </thead>
             <tbody>
-                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"  th:each="property : ${propertyList}">
-                <th th:text="${property.id}" scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700"  th:each="category : ${categoryList}">
+                <th th:text="${category.id}" scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                 </th>
-                <th th:text="${property.title}" scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+                <th th:text="${category.getName()}" scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                 </th>
-                <td th:text="${property.price}" class="px-6 py-4">
-                </td>
-                <td th:text="${property.category_id}" class="px-6 py-4">
-                </td>
-                <td th:text="${property.location}" class="px-6 py-4">
-                </td>
                 <td class="px-6 py-4">
-                    <a th:href="${'/admin/property/' + property.id}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
+                    <a th:href="${'/admin/category/' + category.getId()}" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
                         View
                     </a>
                     <a class="text-white bg-amber-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-3 py-1.5 me-2 mb-2 dark:bg-red-500 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">
@@ -104,8 +84,7 @@
         </ul>
     </nav>
     <!-- End Pagination  -->
-
-</div>
+</section>
 <!-- End Main Content  -->
 
 

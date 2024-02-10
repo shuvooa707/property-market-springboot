@@ -1,10 +1,31 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>$Title$</title>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
 </head>
 <body>
-$END$
+
+<aside th:fragment="sidebar" id="sidebar-multi-level-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
+    <div class="bg-gray-900 px-5 py-5 text-white text-center">
+        <a href="/" class="w-full h-full block">Home</a>
+    </div>
+    <div class="h-full px-0 py-0 overflow-y-auto bg-gray-50 dark:bg-gray-50">
+        <ul class="font-medium">
+            <li class="p-4 mb-1 text-white bg-blue-500 hover:bg-blue-900 cursor-pointer"  th:each="category : ${categories}">
+                <a class="w-full h-full block" th:href="${'/property/category/' + category.slug }" >
+                    <span th:text="${category.properties.size()}" class="inline-flex items-center rounded-md bg-gray-800 text-white px-1 py-1 text-xs font-medium ring-1 ring-inset ring-pink-700/10">
+                        1
+                    </span>
+                    <span th:text="${category.name}"></span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</aside>
+
 </body>
 </html>
