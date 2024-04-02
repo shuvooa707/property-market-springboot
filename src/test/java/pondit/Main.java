@@ -1,10 +1,43 @@
 package pondit;
 
+import java.sql.Timestamp;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
+//        int numbers = Integer.MAX_VALUE / 1000;
+        int numbers = 4000000;
+        int randomNumbers[] = new int[numbers];
+        for (int i = 0; i < numbers; i++) {
+            randomNumbers[i] = generateInteger();
+        }
+        ArrayList<Integer> integerArrayList = new ArrayList<>();
+        LinkedList<Integer> integerLinkedList = new LinkedList<>();
 
+        long start = System.currentTimeMillis();
+        for (int i = 0; i < numbers; i++) {
+            integerArrayList.add(0, randomNumbers[i]);
+        }
+        long end = System.currentTimeMillis();
+        System.out.println( "ArrayList Time Taken : " + (end-start) );
+
+        integerArrayList.clear();
+        integerArrayList = null;
+
+        start = System.currentTimeMillis();
+        for (int i = 0; i < numbers; i++) {
+            integerLinkedList.add(0, randomNumbers[i]);
+        }
+        end = System.currentTimeMillis();
+        System.out.println( "LinkedList Time Taken : " + (end-start) );
+
+    }
+
+    private static int generateInteger() {
+        return (int) (Math.random() * Integer.MAX_VALUE);
     }
 
     public static String replaceSpaces(String input) {
@@ -40,15 +73,16 @@ public class Main {
 
         return stringBuilder.toString();
     }
-
-//    public static int wordFrequency(String word, String input) {
-//        input.split(" ");
-//    }
 }
 
 
 enum ConnectionType {
     MYSQL, ORACLE, POSTGRES
+}
+
+
+class Test {
+
 }
 
 //abstract class Vehicle {

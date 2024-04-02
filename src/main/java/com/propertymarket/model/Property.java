@@ -1,13 +1,13 @@
 package com.propertymarket.model;
 
-import jakarta.annotation.Nullable;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.antlr.v4.runtime.misc.NotNull;
 import org.hibernate.annotations.CreationTimestamp;
-import org.springframework.stereotype.Component;
 
 import java.util.Date;
 import java.util.List;
@@ -25,6 +25,7 @@ public class Property {
     @NotNull
     String title;
 
+    @Lob
     @Column(name = "description")
     String description;
 
@@ -63,8 +64,17 @@ public class Property {
 
 
     @ManyToOne
+    @JsonManagedReference
     private Category category;
 
     @ManyToOne
     private Company company;
+
+    @OneToMany
+    @JsonBackReference
+    private List<Review> reviews;
+
+    @OneToMany(mappedBy = "property")
+    @JsonBackReference
+    private List<PropertyImage> images;
 }

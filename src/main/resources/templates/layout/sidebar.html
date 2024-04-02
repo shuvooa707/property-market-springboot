@@ -9,15 +9,12 @@
 </head>
 <body>
 
-<aside th:fragment="sidebar" id="sidebar-multi-level-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
-    <div class="bg-gray-900 px-5 py-5 text-white text-center">
-        <a href="/" class="w-full h-full block">Home</a>
-    </div>
+<aside style="max-width: 380px;" th:fragment="sidebar" id="sidebar-multi-level-sidebar" class="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0" aria-label="Sidebar">
     <div class="h-full px-0 py-0 overflow-y-auto bg-gray-50 dark:bg-gray-50">
         <ul class="font-medium">
-            <li class="p-4 mb-1 text-white bg-blue-500 hover:bg-blue-900 cursor-pointer"  th:each="category : ${categories}">
+            <li th:class="${ category.slug.equals(slug) ? 'text-gray-950 bg-blue-50 p-4 mb-0 hover:bg-blue-900 cursor-pointer' : 'text-white bg-blue-500 p-4 mb-0 hover:bg-blue-900 cursor-pointer' }"  th:each="category : ${categories}">
                 <a class="w-full h-full block" th:href="${'/property/category/' + category.slug }" >
-                    <span th:text="${category.properties.size()}" class="inline-flex items-center rounded-md bg-gray-800 text-white px-1 py-1 text-xs font-medium ring-1 ring-inset ring-pink-700/10">
+                    <span th:text="${category.properties.size()}" class="inline-flex items-center rounded-md bg-gray-800 text-white px-1 py-0.5 text-xs font-medium ring-1 ring-inset ring-pink-700/10">
                         1
                     </span>
                     <span th:text="${category.name}"></span>

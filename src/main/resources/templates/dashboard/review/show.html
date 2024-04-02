@@ -1,0 +1,38 @@
+<!doctype html>
+<html
+    lang="en"
+    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    th:replace="/dashboard/layout/DashboardLayout::layout(~{::section})"
+>
+
+<head>
+
+</head>
+<body>
+
+<!--  Main Content  -->
+<section class="grid grid-cols-1 w-2/4 md:grid-cols-1 xl:grid-cols-1 p-8 m-5 " style="margin-left: 480px">
+    <div class="bg-gray-50 p-3 mb-1 rounded-sm inline-block">
+
+    </div>
+    <div class="bg-gray-50 p-3 rounded-md inline-block">
+        <div th:text="${review.content}"></div>
+        <br>
+        <hr class="">
+        <small class="text-gray-600">01-01-2020</small>
+        <div class="text-end">
+            <div>
+                <img src="http://localhost:9090/uploads/default_property_thumbnail.png" class="inline-block" width="60" height="60" alt="">
+                <a th:text="${'user'}"></a>
+            </div>
+            <button type="submit" class="ml-5 cursor-pointer text-white bg-red-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-sm text-sm px-2 py-.5 me-2 mb-2 dark:bg-amber-500 dark:hover:bg-amber-600 focus:outline-none dark:focus:ring-blue-800">
+                <small>Delete</small>
+            </button>
+        </div>
+    </div>
+</section>
+<!-- End Main Content  -->
+
+
+</body>
+</html>

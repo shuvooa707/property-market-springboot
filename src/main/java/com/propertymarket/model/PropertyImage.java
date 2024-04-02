@@ -1,5 +1,6 @@
 package com.propertymarket.model;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -15,14 +16,18 @@ public class PropertyImage {
     Long id;
 
     @Column(name = "path")
-    String path;
+    private String path;
 
-    @Column(name = "property_id")
-    Long property_id;
 
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "created_at", updatable = false)
     private Date CreatedAt;
+
+
+    /*** Relations ***/
+    @ManyToOne
+    @JsonManagedReference
+    private Property property;
 }

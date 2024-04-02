@@ -12,7 +12,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "property_companies")
+@Entity(name = "companies")
 public class Company {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -36,7 +36,7 @@ public class Company {
 
 
     @OneToMany
-    private List<Property> propertyList;
+    private List<Property> properties;
 
     @OneToOne
     private Address address;

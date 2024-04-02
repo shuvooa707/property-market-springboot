@@ -1,5 +1,6 @@
 package com.propertymarket.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -31,6 +32,7 @@ public class Category {
 
     /** Relationships **/
     @OneToMany(mappedBy = "category")
+    @JsonBackReference
     private List<Property> properties;
 
 }

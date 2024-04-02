@@ -28,7 +28,7 @@
             <version>3.2.1</version>
         </dependency>
 
-        <!--        <dependency>-->
+<!--        <dependency>-->
 <!--            <groupId>org.springframework.boot</groupId>-->
 <!--            <artifactId>spring-boot-starter-security</artifactId>-->
 <!--        </dependency>-->
@@ -87,6 +87,10 @@
             <artifactId>log4j</artifactId>
             <version>1.2.17</version>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
 
 
     </dependencies>
@@ -104,6 +108,16 @@
                         </exclude>
                     </excludes>
                 </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                        <configuration>
+                            <classifier>spring-boot</classifier>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>

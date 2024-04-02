@@ -75,8 +75,8 @@ public class PropertyService {
           .stream()
           .forEach(imageFilePath -> {
               PropertyImage propertyImage = new PropertyImage();
+              propertyImage.setProperty(newlyCreatedProperty);
               propertyImage.setPath(imageFilePath);
-              propertyImage.setProperty_id(newlyCreatedProperty.getId());
               propertyImageRepository.save(propertyImage);
           });
     }
@@ -104,5 +104,10 @@ public class PropertyService {
     public List<Property> findAllByCategoryId(Long categoryId) {
 
         return propertyRepository.findAllByCategoryId(categoryId);
+    }
+
+    public Page<Property> findAllByName(String propertyName, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+        return propertyRepository.findByTitleContaining(propertyName, pageable);
     }
 }

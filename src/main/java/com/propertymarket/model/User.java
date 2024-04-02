@@ -1,12 +1,16 @@
 package com.propertymarket.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.boot.context.properties.bind.DefaultValue;
 
 import java.util.Date;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -32,9 +36,18 @@ public class User {
     @Column(name = "zip_code")
     Integer zip_code;
 
+    @Column(name = "image")
+    String image;
 
-    @Enumerated(EnumType.ORDINAL)
-    UserRole role;
+
+    @ManyToOne
+    @JsonManagedReference
+    private Role role;
+
+
+    @OneToMany
+    @JsonBackReference
+    private List<Review> reviews;
 
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
@@ -42,6 +55,3 @@ public class User {
     private Date CreatedAt;
 }
 
-enum UserRole {
-    Admin, Client
-}
